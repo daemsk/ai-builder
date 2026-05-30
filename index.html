@@ -3,45 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Builder Portfolio — Kurtis Daems</title>
+  <title>AI Builder Portfolio | Kurtis Daems</title>
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
     :root {
-      /* Noom Palette */
-      --black:      #191717;
+      /* Core */
+      --black:      #0D0D0F;
       --white:      #FFFFFF;
-      --off-white:  #F6F4EE;
-      --sand:       #E4DECE;
-      --gray:       #595959;
-      --light-gray: #AAAAAA;
-      --border:     #E0DDD5;
-
-      --pine:       #2B4010;
-      --kale:       #316700;
-      --sprout:     #A9D15A;
-      --mint:       #C8E3B1;
-
+      --off-white:  #F5F5F7;
+      --sand:       #E8E4DC;
+      --gray:       #5A5A6A;
+      --light-gray: #A0A0B0;
+      --border:     #E2E2EA;
+ 
+      /* Blue palette (replaces all green) */
+      --navy:       #0D1F3C;
+      --cobalt:     #1A3FAA;
+      --blue:       #2563EB;
+      --periwinkle: #93C5FD;
+      --pale-blue:  #DBEAFE;
+      --ice:        #EFF6FF;
+ 
+      /* Supporting (kept from Noom) */
       --blueberry:  #1D3A44;
       --lagoon:     #05727A;
       --stream:     #6CC1B6;
       --sky:        #B4E0D8;
-
-      --tarocco:    #FB513B;
       --salmon:     #F4BEAE;
-      --berry:      #A82F67;
-      --blossom:    #F2AACD;
       --gold:       #AD925E;
-      --cinnamon:   #AA3521;
-
+ 
       --radius: 16px;
       --serif: 'Source Serif 4', Georgia, serif;
       --sans:  'DM Sans', Arial, sans-serif;
     }
-
+ 
     html { scroll-behavior: smooth; }
-
+ 
     body {
       background: var(--white);
       color: var(--black);
@@ -49,7 +48,7 @@
       font-size: 16px;
       line-height: 1.7;
     }
-
+ 
     /* ── NAV ── */
     nav {
       position: fixed;
@@ -59,10 +58,9 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px 48px;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
-      transition: background 0.3s;
     }
     .nav-logo {
       font-family: var(--serif);
@@ -77,11 +75,23 @@
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
+      position: relative;
       transition: color 0.2s;
     }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 1.5px;
+      background: var(--blue);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
     .nav-links a:hover { color: var(--black); }
+    .nav-links a:hover::after { transform: scaleX(1); }
     .nav-cta {
-      background: var(--black);
+      background: var(--navy);
       color: var(--white) !important;
       padding: 10px 22px;
       border-radius: 50px;
@@ -89,11 +99,12 @@
       font-size: 13px !important;
       transition: background 0.2s !important;
     }
-    .nav-cta:hover { background: var(--pine) !important; color: var(--white) !important; }
-
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--cobalt) !important; color: var(--white) !important; }
+ 
     /* ── WRAPPER ── */
     .section-wrap { max-width: 1100px; margin: 0 auto; padding: 100px 48px; }
-
+ 
     /* ── HERO ── */
     #hero {
       min-height: 100vh;
@@ -110,14 +121,37 @@
       position: relative;
       z-index: 2;
     }
+    /* Large faded background text */
+    .hero-bg-text {
+      position: absolute;
+      right: -20px;
+      bottom: -40px;
+      font-family: var(--serif);
+      font-size: clamp(160px, 22vw, 280px);
+      font-weight: 400;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(13,31,60,0.07);
+      pointer-events: none;
+      user-select: none;
+      z-index: 1;
+      letter-spacing: -0.04em;
+    }
+    .hero-accent-line {
+      width: 48px;
+      height: 3px;
+      background: var(--blue);
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
     .hero-eyebrow {
       font-family: var(--sans);
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--lagoon);
-      margin-bottom: 24px;
+      color: var(--blue);
+      margin-bottom: 20px;
     }
     .hero-title {
       font-family: var(--serif);
@@ -128,19 +162,15 @@
       color: var(--black);
       margin-bottom: 28px;
     }
-    .hero-title em {
-      font-style: italic;
-      color: var(--kale);
-    }
     .hero-sub {
       font-size: 20px;
       font-weight: 300;
       color: var(--gray);
-      max-width: 520px;
+      max-width: 500px;
       line-height: 1.6;
-      margin-bottom: 48px;
+      margin-bottom: 44px;
     }
-    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 56px; }
     .btn {
       display: inline-block;
       padding: 14px 32px;
@@ -154,51 +184,76 @@
       border: none;
       letter-spacing: 0.01em;
     }
-    .btn-primary { background: var(--black); color: var(--white); }
-    .btn-primary:hover { background: var(--pine); }
+    .btn-primary { background: var(--navy); color: var(--white); }
+    .btn-primary:hover { background: var(--cobalt); }
     .btn-outline {
       background: transparent;
-      border: 1.5px solid var(--lagoon);
-      color: var(--lagoon);
+      border: 1.5px solid var(--blue);
+      color: var(--blue);
     }
-    .btn-outline:hover { background: var(--lagoon); color: var(--white); }
-
-    /* Hero decoration */
+    .btn-outline:hover { background: var(--blue); color: var(--white); }
+ 
+    /* Stats row */
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+    .hero-stat {}
+    .hero-stat-num {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .hero-stat-label {
+      font-size: 13px;
+      color: var(--light-gray);
+      font-weight: 500;
+    }
+ 
+    /* Decorative blob */
     .hero-blob {
       position: absolute;
-      right: -80px; top: 50%;
+      right: 5%; top: 50%;
       transform: translateY(-50%);
-      width: 500px; height: 500px;
+      width: 420px; height: 420px;
       border-radius: 50%;
-      background: radial-gradient(circle at 40% 40%, var(--mint) 0%, var(--sky) 60%, transparent 100%);
-      opacity: 0.55;
+      background: radial-gradient(circle at 35% 35%, var(--pale-blue) 0%, var(--ice) 60%, transparent 100%);
+      opacity: 0.7;
       pointer-events: none;
       z-index: 1;
     }
-    .hero-dots {
-      position: absolute;
-      bottom: 48px; right: 48px;
-      display: grid;
-      grid-template-columns: repeat(6, 8px);
-      gap: 8px;
-      opacity: 0.25;
-      z-index: 1;
-    }
-    .hero-dots span {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--kale);
-      display: block;
-    }
-
+ 
     /* ── SECTION HEADINGS ── */
     .section-eyebrow {
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--lagoon);
+      color: var(--blue);
       margin-bottom: 12px;
+    }
+    .section-header {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .section-num {
+      position: absolute;
+      right: 0; top: -20px;
+      font-family: var(--serif);
+      font-size: clamp(80px, 12vw, 140px);
+      font-weight: 400;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(13,31,60,0.055);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.04em;
     }
     .section-title {
       font-family: var(--serif);
@@ -206,26 +261,27 @@
       font-weight: 400;
       line-height: 1.05;
       letter-spacing: -0.015em;
-      margin-bottom: 20px;
+      color: var(--black);
+      position: relative;
+      z-index: 1;
     }
-    .section-title em { font-style: italic; color: var(--kale); }
     hr.divider {
       border: none;
       border-top: 1px solid var(--border);
       margin: 24px 0 56px;
     }
-
+ 
     /* ── ABOUT ── */
     #about { background: var(--white); }
     #about p {
       font-size: 19px;
       font-weight: 300;
       color: var(--gray);
-      max-width: 680px;
-      line-height: 1.8;
+      max-width: 700px;
+      line-height: 1.85;
     }
     #about p strong { color: var(--black); font-weight: 600; }
-
+ 
     /* ── WORK ── */
     #work { background: var(--off-white); }
     .work-grid {
@@ -238,11 +294,21 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 36px;
-      transition: box-shadow 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .work-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cobalt), var(--blue));
+      border-radius: var(--radius) var(--radius) 0 0;
     }
     .work-card:hover {
-      box-shadow: 0 8px 32px rgba(25,23,23,0.08);
-      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(13,31,60,0.10);
+      transform: translateY(-4px);
     }
     .work-icon {
       width: 48px; height: 48px;
@@ -251,7 +317,7 @@
       font-size: 22px;
       margin-bottom: 20px;
     }
-    .work-icon.green { background: var(--mint); }
+    .work-icon.blue  { background: var(--pale-blue); }
     .work-icon.teal  { background: var(--sky); }
     .work-icon.warm  { background: var(--salmon); }
     .work-card h3 {
@@ -264,9 +330,9 @@
     .work-card p {
       font-size: 14px;
       color: var(--gray);
-      line-height: 1.7;
+      line-height: 1.75;
     }
-
+ 
     /* ── AI PROJECTS ── */
     #projects { background: var(--white); }
     .projects-grid {
@@ -282,15 +348,20 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      transition: box-shadow 0.2s, transform 0.2s;
+      transition: box-shadow 0.25s, transform 0.25s;
+      position: relative;
     }
     .project-card:hover {
-      box-shadow: 0 6px 24px rgba(25,23,23,0.07);
-      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(13,31,60,0.08);
+      transform: translateY(-3px);
+    }
+    .project-card.live {
+      border-left: 3px solid var(--blue);
+      padding-left: 25px;
     }
     .project-card.placeholder {
       border-style: dashed;
-      opacity: 0.45;
+      opacity: 0.4;
     }
     .project-badge {
       display: inline-block;
@@ -303,7 +374,7 @@
       width: fit-content;
     }
     .badge-soon { background: var(--sand); color: var(--gray); }
-    .badge-live { background: var(--mint); color: var(--pine); }
+    .badge-live { background: var(--pale-blue); color: var(--cobalt); }
     .project-card h3 {
       font-family: var(--serif);
       font-size: 17px;
@@ -325,7 +396,7 @@
     .project-link {
       font-size: 13px;
       font-weight: 600;
-      color: var(--lagoon);
+      color: var(--blue);
       text-decoration: none;
       background: none;
       border: none;
@@ -337,15 +408,15 @@
       align-items: center;
       gap: 4px;
     }
-    .project-link:hover { color: var(--blueberry); }
+    .project-link:hover { color: var(--navy); }
     .project-link svg { flex-shrink: 0; }
-
+ 
     /* ── MODAL ── */
     .modal-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(25,23,23,0.6);
+      background: rgba(13,31,60,0.55);
       z-index: 200;
       align-items: center;
       justify-content: center;
@@ -362,9 +433,8 @@
       position: relative;
       max-height: 88vh;
       overflow-y: auto;
-      box-shadow: 0 24px 80px rgba(25,23,23,0.18);
+      box-shadow: 0 32px 80px rgba(13,31,60,0.18);
     }
-    /* Special wide modal for Design System docs */
     .modal.modal-wide { max-width: 780px; }
     .modal-close {
       position: sticky;
@@ -374,7 +444,7 @@
       background: var(--off-white);
       border: none;
       color: var(--gray);
-      font-size: 20px;
+      font-size: 18px;
       width: 36px; height: 36px;
       border-radius: 50%;
       cursor: pointer;
@@ -383,13 +453,13 @@
       flex-shrink: 0;
       z-index: 10;
     }
-    .modal-close:hover { background: var(--sand); color: var(--black); }
+    .modal-close:hover { background: var(--pale-blue); color: var(--navy); }
     .modal-eyebrow {
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--lagoon);
+      color: var(--blue);
       margin-bottom: 8px;
     }
     .modal h2 {
@@ -400,19 +470,15 @@
       margin-bottom: 32px;
       color: var(--black);
     }
-
-    /* Step-by-step styles */
+ 
+    /* Steps */
     .steps { display: flex; flex-direction: column; gap: 20px; }
-    .step {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-    }
+    .step { display: flex; gap: 16px; align-items: flex-start; }
     .step-num {
       flex-shrink: 0;
       width: 32px; height: 32px;
       border-radius: 50%;
-      background: var(--black);
+      background: var(--navy);
       color: var(--white);
       font-family: var(--serif);
       font-size: 15px;
@@ -427,20 +493,20 @@
       color: var(--black);
       margin-bottom: 4px;
     }
-    .step-body p { font-size: 14px; color: var(--gray); line-height: 1.6; }
+    .step-body p { font-size: 14px; color: var(--gray); line-height: 1.65; }
     .step-body code {
       display: inline-block;
-      background: var(--off-white);
-      border: 1px solid var(--border);
+      background: var(--ice);
+      border: 1px solid var(--pale-blue);
       border-radius: 6px;
       padding: 2px 8px;
       font-size: 13px;
-      color: var(--kale);
+      color: var(--cobalt);
       font-family: 'Courier New', monospace;
       margin-top: 4px;
     }
-
-    /* Design system doc styles (used inside modal) */
+ 
+    /* Design system doc */
     .ds-section { margin-bottom: 36px; }
     .ds-section:last-child { margin-bottom: 0; }
     .ds-label {
@@ -448,7 +514,7 @@
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--lagoon);
+      color: var(--blue);
       margin-bottom: 14px;
       padding-bottom: 8px;
       border-bottom: 1px solid var(--border);
@@ -458,36 +524,12 @@
       grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
       gap: 10px;
     }
-    .swatch {
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-    .swatch-color {
-      height: 52px;
-      width: 100%;
-    }
-    .swatch-info {
-      background: var(--white);
-      padding: 8px 10px;
-    }
-    .swatch-name {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--black);
-      display: block;
-    }
-    .swatch-hex {
-      font-size: 10px;
-      color: var(--gray);
-      font-family: 'Courier New', monospace;
-    }
-    .swatch-use {
-      font-size: 10px;
-      color: var(--light-gray);
-      margin-top: 2px;
-      display: block;
-    }
+    .swatch { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    .swatch-color { height: 52px; width: 100%; }
+    .swatch-info { background: var(--white); padding: 8px 10px; }
+    .swatch-name { font-size: 11px; font-weight: 600; color: var(--black); display: block; }
+    .swatch-hex { font-size: 10px; color: var(--gray); font-family: 'Courier New', monospace; }
+    .swatch-use { font-size: 10px; color: var(--light-gray); margin-top: 2px; display: block; }
     .type-samples { display: flex; flex-direction: column; gap: 16px; }
     .type-sample {
       background: var(--off-white);
@@ -500,13 +542,7 @@
       flex-wrap: wrap;
     }
     .type-sample-text { line-height: 1.0; }
-    .type-meta {
-      font-size: 11px;
-      color: var(--gray);
-      text-align: right;
-      flex-shrink: 0;
-      line-height: 1.5;
-    }
+    .type-meta { font-size: 11px; color: var(--gray); text-align: right; flex-shrink: 0; line-height: 1.5; }
     .vibe-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .vibe-tag {
       display: inline-block;
@@ -527,11 +563,11 @@
       content: '→';
       position: absolute;
       left: 0;
-      color: var(--lagoon);
+      color: var(--blue);
       font-weight: 600;
     }
-
-    /* Techniques / prompts list */
+ 
+    /* Doc list */
     .doc-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .doc-list li {
       font-size: 14px;
@@ -539,8 +575,8 @@
       padding: 12px 16px;
       background: var(--off-white);
       border-radius: 10px;
-      line-height: 1.5;
-      border-left: 3px solid var(--mint);
+      line-height: 1.6;
+      border-left: 3px solid var(--pale-blue);
     }
     .doc-list li strong { color: var(--black); }
     .doc-section-title {
@@ -551,9 +587,10 @@
       margin: 24px 0 14px;
     }
     .doc-section-title:first-child { margin-top: 0; }
-
+ 
     /* ── CONTACT ── */
-    #contact { background: var(--off-white); }
+    #contact { background: var(--navy); }
+    #contact .section-eyebrow { color: var(--periwinkle); }
     .contact-inner {
       display: flex;
       justify-content: space-between;
@@ -561,16 +598,16 @@
       flex-wrap: wrap;
       gap: 40px;
     }
-    .contact-left { max-width: 460px; }
+    .contact-left { max-width: 500px; }
     .contact-left h2 {
       font-family: var(--serif);
-      font-size: clamp(28px, 4vw, 44px);
+      font-size: clamp(28px, 4vw, 48px);
       font-weight: 400;
       line-height: 1.05;
       margin-bottom: 14px;
+      color: var(--white);
     }
-    .contact-left h2 em { font-style: italic; color: var(--kale); }
-    .contact-left p { font-size: 16px; color: var(--gray); }
+    .contact-left p { font-size: 17px; color: var(--periwinkle); font-weight: 300; line-height: 1.7; }
     .contact-links {
       display: flex;
       flex-direction: column;
@@ -582,41 +619,40 @@
       align-items: center;
       gap: 10px;
       padding: 14px 22px;
-      border: 1.5px solid var(--border);
+      border: 1.5px solid rgba(255,255,255,0.15);
       border-radius: 50px;
       text-decoration: none;
-      color: var(--gray);
+      color: var(--periwinkle);
       font-size: 14px;
       font-weight: 500;
-      background: var(--white);
+      background: rgba(255,255,255,0.05);
       transition: all 0.2s;
       white-space: nowrap;
     }
     .contact-link:hover {
-      border-color: var(--lagoon);
-      color: var(--lagoon);
+      border-color: var(--white);
+      color: var(--white);
+      background: rgba(255,255,255,0.1);
     }
     .footer-bottom {
       margin-top: 80px;
       padding-top: 28px;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid rgba(255,255,255,0.1);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
     }
-    .footer-bottom p { font-size: 13px; color: var(--light-gray); }
-    .footer-mark {
-      display: flex; align-items: center; gap: 6px;
-    }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); }
+    .footer-mark { display: flex; align-items: center; gap: 6px; }
     .footer-mark span {
       width: 8px; height: 8px;
       border-radius: 50%;
-      background: var(--sprout);
+      background: var(--blue);
       display: inline-block;
     }
-
+ 
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
       nav { padding: 16px 20px; }
@@ -625,14 +661,17 @@
       .section-wrap { padding: 80px 20px; }
       .hero-inner { padding: 120px 20px 80px; }
       .hero-blob { display: none; }
+      .hero-bg-text { display: none; }
+      .section-num { display: none; }
       .modal { padding: 32px 24px; }
       .contact-inner { flex-direction: column; }
       .footer-bottom { flex-direction: column; text-align: center; }
+      .hero-stats { gap: 28px; }
     }
   </style>
 </head>
 <body>
-
+ 
 <!-- NAV -->
 <nav>
   <div class="nav-logo">Kurtis Daems</div>
@@ -643,77 +682,97 @@
     <a href="#contact" class="nav-cta">Get in Touch</a>
   </div>
 </nav>
-
+ 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-blob"></div>
-  <div class="hero-dots">
-    <span></span><span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span><span></span>
-  </div>
+  <div class="hero-bg-text">KD</div>
   <div class="hero-inner">
+    <div class="hero-accent-line"></div>
     <div class="hero-eyebrow">AI Builder Portfolio</div>
-    <h1 class="hero-title">Kurtis<br /><em>Daems</em></h1>
-    <p class="hero-sub">AI Builder — turning curiosity into tools that actually work.</p>
+    <h1 class="hero-title">Kurtis<br />Daems</h1>
+    <p class="hero-sub">Building AI tools and workflows that turn good ideas into real results.</p>
     <div class="hero-cta">
-      <a href="#projects" class="btn btn-primary">See My Projects</a>
+      <a href="#projects" class="btn btn-primary">View Projects</a>
       <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">9+</div>
+        <div class="hero-stat-label">Projects built</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">5+</div>
+        <div class="hero-stat-label">Tools connected</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Powered by Claude</div>
+      </div>
     </div>
   </div>
 </section>
-
+ 
 <!-- ABOUT -->
 <section id="about">
   <div class="section-wrap">
     <div class="section-eyebrow">About</div>
-    <h2 class="section-title">Hey, I'm <em>Kurtis.</em></h2>
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <h2 class="section-title">Hey, I'm Kurtis.</h2>
+    </div>
     <hr class="divider" />
     <p>
-      I'm someone who genuinely <strong>can't stop poking at AI</strong> to see what breaks, what surprises, and what turns out to be surprisingly useful. Right now I'm spending a lot of time building with Claude — automating workflows, creating custom skills, and turning research questions into things I can actually act on. It's less about the tech and more about that moment when a tool clicks and <strong>saves you an hour you didn't have</strong>.
+      I build with AI every day. Right now that means designing <strong>automated pipelines</strong>, creating custom Claude skills, and finding faster, more reliable ways to do research and analysis. The technology is interesting, but what actually drives me is shipping things that <strong>genuinely improve how work gets done</strong>. Each project on this site is a real tool I use or have used.
     </p>
   </div>
 </section>
-
+ 
 <!-- WORK -->
 <section id="work">
   <div class="section-wrap">
     <div class="section-eyebrow">Work</div>
-    <h2 class="section-title">What I'm <em>focused on.</em></h2>
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <h2 class="section-title">What I'm focused on.</h2>
+    </div>
     <hr class="divider" />
     <div class="work-grid">
       <div class="work-card">
-        <div class="work-icon green">⚡</div>
+        <div class="work-icon blue">⚡</div>
         <h3>AI Workflow Automation</h3>
-        <p>Building end-to-end automated pipelines that replace repetitive manual work — scheduling, routing, summarizing, and acting on information without constant babysitting.</p>
+        <p>Building end-to-end automated pipelines that replace repetitive manual work. Scheduling, routing, summarizing, and acting on information without constant oversight.</p>
       </div>
       <div class="work-card">
         <div class="work-icon teal">🔬</div>
         <h3>AI-Assisted Research</h3>
-        <p>Using AI to compress the gap between a question and a well-sourced answer — faster literature reviews, cleaner synthesis, and research that doesn't take all day.</p>
+        <p>Using AI to close the gap between a question and a well-sourced answer. Faster synthesis, cleaner output, and research that doesn't take all day.</p>
       </div>
       <div class="work-card">
         <div class="work-icon warm">🧩</div>
-        <h3>Custom Claude Skills & Plugins</h3>
-        <p>Creating reusable, shareable tools built on top of Claude — from voice guides to design systems — that anyone can drop into their own Cowork setup and start using immediately.</p>
+        <h3>Custom Claude Skills</h3>
+        <p>Creating reusable, shareable tools built on top of Claude. From voice guides to design systems, these skills bring consistent AI behavior to any project.</p>
       </div>
     </div>
   </div>
 </section>
-
+ 
 <!-- AI PROJECTS -->
 <section id="projects">
   <div class="section-wrap">
     <div class="section-eyebrow">AI Projects</div>
-    <h2 class="section-title">Things I've <em>built.</em></h2>
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <h2 class="section-title">Things I've built.</h2>
+    </div>
     <hr class="divider" />
     <div class="projects-grid">
-
-      <!-- Card 1: Design System Skill — LIVE -->
-      <div class="project-card">
+ 
+      <!-- Live cards -->
+      <div class="project-card live">
         <span class="project-badge badge-live">Live</span>
         <h3>Design System Skill</h3>
-        <p class="desc">A reusable Claude skill that applies a complete design system — colors, type, layout — to any build, every time.</p>
+        <p class="desc">A reusable Claude skill that applies a complete design system including colors, type, and layout to any build, every time.</p>
         <div class="project-links">
           <button class="project-link" onclick="openModal('ds-built')">
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
@@ -725,12 +784,11 @@
           </button>
         </div>
       </div>
-
-      <!-- Card 2: Portfolio Website — LIVE -->
-      <div class="project-card">
+ 
+      <div class="project-card live">
         <span class="project-badge badge-live">Live</span>
         <h3>Portfolio Website</h3>
-        <p class="desc">This site — a single-file HTML portfolio built with Claude in Cowork, styled with my Noom design skill.</p>
+        <p class="desc">This site. A single-file HTML portfolio built with Claude in Cowork and styled with my Noom design skill.</p>
         <div class="project-links">
           <button class="project-link" onclick="openModal('pf-built')">
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
@@ -742,181 +800,121 @@
           </button>
         </div>
       </div>
-
-      <!-- Remaining cards: Coming Soon / empty popups -->
+ 
+      <!-- Coming Soon -->
       <div class="project-card">
         <span class="project-badge badge-soon">Coming Soon</span>
         <h3>Voice Guide Skill</h3>
         <p class="desc">A skill that walks users through complex processes using conversational voice output.</p>
         <div class="project-links">
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            How I Built This
-          </button>
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            Documentation
-          </button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>How I Built This</button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>Documentation</button>
         </div>
       </div>
-
+ 
       <div class="project-card">
         <span class="project-badge badge-soon">Coming Soon</span>
         <h3>Email Manager Scheduled Task</h3>
         <p class="desc">An automated task that triages, labels, and summarizes email on a daily schedule.</p>
         <div class="project-links">
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            How I Built This
-          </button>
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            Documentation
-          </button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>How I Built This</button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>Documentation</button>
         </div>
       </div>
-
+ 
       <div class="project-card">
         <span class="project-badge badge-soon">Coming Soon</span>
         <h3>Research Presentation</h3>
         <p class="desc">AI-assisted research compiled and formatted into a polished slide deck automatically.</p>
         <div class="project-links">
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            How I Built This
-          </button>
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            Documentation
-          </button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>How I Built This</button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>Documentation</button>
         </div>
       </div>
-
+ 
       <div class="project-card">
         <span class="project-badge badge-soon">Coming Soon</span>
         <h3>Spreadsheet Analysis</h3>
         <p class="desc">Drop in a spreadsheet, get back a clean analysis with charts and key takeaways.</p>
         <div class="project-links">
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            How I Built This
-          </button>
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            Documentation
-          </button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>How I Built This</button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>Documentation</button>
         </div>
       </div>
-
+ 
       <div class="project-card">
         <span class="project-badge badge-soon">Coming Soon</span>
         <h3>Data Dashboard</h3>
         <p class="desc">A live artifact dashboard that pulls from connected tools and surfaces what matters.</p>
         <div class="project-links">
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            How I Built This
-          </button>
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            Documentation
-          </button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>How I Built This</button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>Documentation</button>
         </div>
       </div>
-
+ 
       <div class="project-card">
         <span class="project-badge badge-soon">Coming Soon</span>
         <h3>File Organization Process</h3>
         <p class="desc">An automated workflow that scans, categorizes, and reorganizes files by content and type.</p>
         <div class="project-links">
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            How I Built This
-          </button>
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            Documentation
-          </button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>How I Built This</button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>Documentation</button>
         </div>
       </div>
-
+ 
       <div class="project-card">
         <span class="project-badge badge-soon">Coming Soon</span>
         <h3>Custom Workflow</h3>
         <p class="desc">A bespoke multi-step Claude workflow connecting several tools into a single trigger.</p>
         <div class="project-links">
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            How I Built This
-          </button>
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            Documentation
-          </button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>How I Built This</button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>Documentation</button>
         </div>
       </div>
-
+ 
       <!-- Placeholders -->
       <div class="project-card placeholder">
         <span class="project-badge badge-soon">Coming Soon</span>
         <h3>Future Project</h3>
         <p class="desc">Something new is in the works.</p>
         <div class="project-links">
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            How I Built This
-          </button>
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            Documentation
-          </button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>How I Built This</button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>Documentation</button>
         </div>
       </div>
-
+ 
       <div class="project-card placeholder">
         <span class="project-badge badge-soon">Coming Soon</span>
         <h3>Future Project</h3>
         <p class="desc">Something new is in the works.</p>
         <div class="project-links">
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            How I Built This
-          </button>
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            Documentation
-          </button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>How I Built This</button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>Documentation</button>
         </div>
       </div>
-
+ 
       <div class="project-card placeholder">
         <span class="project-badge badge-soon">Coming Soon</span>
         <h3>Future Project</h3>
         <p class="desc">Something new is in the works.</p>
         <div class="project-links">
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            How I Built This
-          </button>
-          <button class="project-link" onclick="openModal('empty')">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>
-            Documentation
-          </button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>How I Built This</button>
+          <button class="project-link" onclick="openModal('empty')"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9"/><path d="M10 2h4v4"/><line x1="14" y1="2" x2="7" y2="9"/></svg>Documentation</button>
         </div>
       </div>
-
+ 
     </div>
   </div>
 </section>
-
+ 
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-wrap">
     <div class="contact-inner">
       <div class="contact-left">
         <div class="section-eyebrow">Contact</div>
-        <h2>Let's <em>connect.</em></h2>
-        <p>Always happy to talk AI, tools, and what's possible.</p>
+        <h2>Let's connect.</h2>
+        <p>Open to conversations about AI, automation, and where this technology is headed. Reach out any time.</p>
       </div>
       <div class="contact-links">
         <a href="mailto:kdaems2@gmail.com" class="contact-link">
@@ -938,30 +936,28 @@
     </div>
   </div>
 </section>
-
-<!-- ═══════════════════════════════════════════
-     MODALS
-     ═══════════════════════════════════════════ -->
+ 
+<!-- ══════════════════════ MODALS ══════════════════════ -->
 <div class="modal-overlay" id="modal-overlay" onclick="closeModalOnBg(event)">
-
+ 
   <!-- DS: How I Built This -->
   <div class="modal" id="modal-ds-built" style="display:none">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-eyebrow">Design System Skill · How I Built This</div>
-    <h2>From inspiration to<br />reusable skill</h2>
+    <h2>From inspiration to reusable skill</h2>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-body">
           <strong>Found an inspiration website</strong>
-          <p>Spotted Noom's site and loved the editorial warmth — serif headlines, nature greens, generous space. That was the vibe I wanted everywhere.</p>
+          <p>Spotted Noom's site and liked the editorial warmth: serif headlines, nature greens, generous space. That was the aesthetic I wanted to carry across all my builds.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
           <strong>Used Claude in Chrome to extract the design DNA</strong>
-          <p>Pointed Claude at the live site and asked it to identify every color, typeface, spacing pattern, and layout principle it could find. One prompt, full system.</p>
+          <p>Pointed Claude at the live site and asked it to identify every color, typeface, spacing pattern, and layout principle it could find. One prompt, full system extracted.</p>
         </div>
       </div>
       <div class="step">
@@ -976,183 +972,68 @@
         <div class="step-num">4</div>
         <div class="step-body">
           <strong>Now it works everywhere</strong>
-          <p>Type <code>/noom-design</code> at the start of any session and every build — website, doc, deck — automatically matches the style. No re-explaining the design system ever again.</p>
+          <p>Type <code>/noom-design</code> at the start of any session and every build, whether a website, doc, or deck, automatically matches the style. No re-explaining the design system.</p>
         </div>
       </div>
     </div>
   </div>
-
+ 
   <!-- DS: Documentation -->
   <div class="modal modal-wide" id="modal-ds-docs" style="display:none">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-eyebrow">Design System Skill · Documentation</div>
     <h2>Noom Design System</h2>
-
-    <!-- Colors: Primary -->
+ 
     <div class="ds-section">
       <div class="ds-label">Primary Colors</div>
       <div class="swatch-grid">
         <div class="swatch">
           <div class="swatch-color" style="background:#191717"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Noom Black</span>
-            <span class="swatch-hex">#191717</span>
-            <span class="swatch-use">Text, CTA fill</span>
-          </div>
+          <div class="swatch-info"><span class="swatch-name">Noom Black</span><span class="swatch-hex">#191717</span><span class="swatch-use">Text, CTA fill</span></div>
         </div>
         <div class="swatch">
           <div class="swatch-color" style="background:#FFFFFF;border-bottom:1px solid #E0DDD5"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">White</span>
-            <span class="swatch-hex">#FFFFFF</span>
-            <span class="swatch-use">Page bg, button text</span>
-          </div>
+          <div class="swatch-info"><span class="swatch-name">White</span><span class="swatch-hex">#FFFFFF</span><span class="swatch-use">Page bg, button text</span></div>
         </div>
         <div class="swatch">
           <div class="swatch-color" style="background:#F6F4EE"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Off-White</span>
-            <span class="swatch-hex">#F6F4EE</span>
-            <span class="swatch-use">Section bg, cards</span>
-          </div>
+          <div class="swatch-info"><span class="swatch-name">Off-White</span><span class="swatch-hex">#F6F4EE</span><span class="swatch-use">Section bg, cards</span></div>
         </div>
       </div>
     </div>
-
-    <!-- Colors: Green -->
+ 
     <div class="ds-section">
       <div class="ds-label">Brand Green</div>
       <div class="swatch-grid">
-        <div class="swatch">
-          <div class="swatch-color" style="background:#2B4010"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Pine</span>
-            <span class="swatch-hex">#2B4010</span>
-            <span class="swatch-use">Deep brand green</span>
-          </div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-color" style="background:#316700"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Kale</span>
-            <span class="swatch-hex">#316700</span>
-            <span class="swatch-use">Primary brand</span>
-          </div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-color" style="background:#A9D15A"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Sprout</span>
-            <span class="swatch-hex">#A9D15A</span>
-            <span class="swatch-use">Bright highlight</span>
-          </div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-color" style="background:#C8E3B1"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Mint</span>
-            <span class="swatch-hex">#C8E3B1</span>
-            <span class="swatch-use">Card backgrounds</span>
-          </div>
-        </div>
+        <div class="swatch"><div class="swatch-color" style="background:#2B4010"></div><div class="swatch-info"><span class="swatch-name">Pine</span><span class="swatch-hex">#2B4010</span><span class="swatch-use">Deep brand green</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#316700"></div><div class="swatch-info"><span class="swatch-name">Kale</span><span class="swatch-hex">#316700</span><span class="swatch-use">Primary brand</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#A9D15A"></div><div class="swatch-info"><span class="swatch-name">Sprout</span><span class="swatch-hex">#A9D15A</span><span class="swatch-use">Bright highlight</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#C8E3B1"></div><div class="swatch-info"><span class="swatch-name">Mint</span><span class="swatch-hex">#C8E3B1</span><span class="swatch-use">Card backgrounds</span></div></div>
       </div>
     </div>
-
-    <!-- Colors: Teal -->
+ 
     <div class="ds-section">
       <div class="ds-label">Brand Teal</div>
       <div class="swatch-grid">
-        <div class="swatch">
-          <div class="swatch-color" style="background:#1D3A44"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Blueberry</span>
-            <span class="swatch-hex">#1D3A44</span>
-            <span class="swatch-use">Deep teal/navy</span>
-          </div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-color" style="background:#05727A"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Lagoon</span>
-            <span class="swatch-hex">#05727A</span>
-            <span class="swatch-use">Action color</span>
-          </div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-color" style="background:#6CC1B6"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Stream</span>
-            <span class="swatch-hex">#6CC1B6</span>
-            <span class="swatch-use">Mid teal</span>
-          </div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-color" style="background:#B4E0D8"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Sky</span>
-            <span class="swatch-hex">#B4E0D8</span>
-            <span class="swatch-use">Soft teal wash</span>
-          </div>
-        </div>
+        <div class="swatch"><div class="swatch-color" style="background:#1D3A44"></div><div class="swatch-info"><span class="swatch-name">Blueberry</span><span class="swatch-hex">#1D3A44</span><span class="swatch-use">Deep teal/navy</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#05727A"></div><div class="swatch-info"><span class="swatch-name">Lagoon</span><span class="swatch-hex">#05727A</span><span class="swatch-use">Action color</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#6CC1B6"></div><div class="swatch-info"><span class="swatch-name">Stream</span><span class="swatch-hex">#6CC1B6</span><span class="swatch-use">Mid teal</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#B4E0D8"></div><div class="swatch-info"><span class="swatch-name">Sky</span><span class="swatch-hex">#B4E0D8</span><span class="swatch-use">Soft teal wash</span></div></div>
       </div>
     </div>
-
-    <!-- Colors: Supporting -->
+ 
     <div class="ds-section">
       <div class="ds-label">Supporting Colors</div>
       <div class="swatch-grid">
-        <div class="swatch">
-          <div class="swatch-color" style="background:#FB513B"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Tarocco</span>
-            <span class="swatch-hex">#FB513B</span>
-            <span class="swatch-use">Orange-red pop</span>
-          </div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-color" style="background:#F4BEAE"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Salmon</span>
-            <span class="swatch-hex">#F4BEAE</span>
-            <span class="swatch-use">Warm blush</span>
-          </div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-color" style="background:#A82F67"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Berry</span>
-            <span class="swatch-hex">#A82F67</span>
-            <span class="swatch-use">Magenta accent</span>
-          </div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-color" style="background:#AD925E"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Gold</span>
-            <span class="swatch-hex">#AD925E</span>
-            <span class="swatch-use">Warm earth</span>
-          </div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-color" style="background:#E4DECE"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Sand</span>
-            <span class="swatch-hex">#E4DECE</span>
-            <span class="swatch-use">Warm neutral</span>
-          </div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-color" style="background:#595959"></div>
-          <div class="swatch-info">
-            <span class="swatch-name">Gray</span>
-            <span class="swatch-hex">#595959</span>
-            <span class="swatch-use">Muted text</span>
-          </div>
-        </div>
+        <div class="swatch"><div class="swatch-color" style="background:#FB513B"></div><div class="swatch-info"><span class="swatch-name">Tarocco</span><span class="swatch-hex">#FB513B</span><span class="swatch-use">Orange-red pop</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#F4BEAE"></div><div class="swatch-info"><span class="swatch-name">Salmon</span><span class="swatch-hex">#F4BEAE</span><span class="swatch-use">Warm blush</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#A82F67"></div><div class="swatch-info"><span class="swatch-name">Berry</span><span class="swatch-hex">#A82F67</span><span class="swatch-use">Magenta accent</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#AD925E"></div><div class="swatch-info"><span class="swatch-name">Gold</span><span class="swatch-hex">#AD925E</span><span class="swatch-use">Warm earth</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#E4DECE"></div><div class="swatch-info"><span class="swatch-name">Sand</span><span class="swatch-hex">#E4DECE</span><span class="swatch-use">Warm neutral</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#595959"></div><div class="swatch-info"><span class="swatch-name">Gray</span><span class="swatch-hex">#595959</span><span class="swatch-use">Muted text</span></div></div>
       </div>
     </div>
-
-    <!-- Typography -->
+ 
     <div class="ds-section">
       <div class="ds-label">Typography</div>
       <div class="type-samples">
@@ -1165,7 +1046,7 @@
           <div class="type-meta">Source Serif 4<br />24px · italic · weight 400<br />line-height 1.0</div>
         </div>
         <div class="type-sample">
-          <div class="type-sample-text" style="font-family:'DM Sans',Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.7;color:#595959">Body text is set in DM Sans — relaxed, warm, human. Pairs with the serif to create editorial tension.</div>
+          <div class="type-sample-text" style="font-family:'DM Sans',Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.7;color:#595959">Body text is set in DM Sans: relaxed, warm, human. Pairs with the serif to create editorial tension.</div>
           <div class="type-meta">DM Sans<br />16px · weight 400<br />line-height 1.7</div>
         </div>
         <div class="type-sample">
@@ -1174,23 +1055,21 @@
         </div>
       </div>
     </div>
-
-    <!-- Layout -->
+ 
     <div class="ds-section">
       <div class="ds-label">Layout Principles</div>
       <ul class="layout-list">
-        <li>Full-bleed editorial sections — each section has a distinct background color</li>
+        <li>Full-bleed editorial sections: each section has a distinct background color</li>
         <li>Max content width of 1100px, centered with generous side padding (48px)</li>
-        <li>Vertical section padding: 80–120px — sections breathe, never feel cramped</li>
-        <li>3-column feature grids with rounded card corners (16–20px radius)</li>
+        <li>Vertical section padding: 80 to 120px so sections breathe and never feel cramped</li>
+        <li>3-column feature grids with rounded card corners (16 to 20px radius)</li>
         <li>Sticky transparent nav that picks up a white blur on scroll</li>
-        <li>Pill-shaped buttons only — border-radius: 50px on all CTAs</li>
-        <li>Serif headlines set tight (line-height: 1.0), sans body set relaxed (1.7)</li>
-        <li>Decorative blobs / dot grids for hero depth — never in content areas</li>
+        <li>Pill-shaped buttons only: border-radius 50px on all CTAs</li>
+        <li>Serif headlines set tight (line-height 1.0), sans body set relaxed (1.7)</li>
+        <li>Decorative blobs and dot grids for hero depth: never in content areas</li>
       </ul>
     </div>
-
-    <!-- Vibe words -->
+ 
     <div class="ds-section">
       <div class="ds-label">The Vibe</div>
       <div class="vibe-tags">
@@ -1205,60 +1084,60 @@
       </div>
     </div>
   </div>
-
+ 
   <!-- Portfolio: How I Built This -->
   <div class="modal" id="modal-pf-built" style="display:none">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-eyebrow">Portfolio Website · How I Built This</div>
-    <h2>How this site<br />got built</h2>
+    <h2>How this site got built</h2>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-body">
           <strong>Started with a scaffolded HTML page</strong>
-          <p>Asked Claude to build a simple, complete portfolio structure in a single HTML file — hero, about, work, projects, contact. The first version was a dark minimal design with all sections stubbed out.</p>
+          <p>Asked Claude to build a complete portfolio structure in a single HTML file: hero, about, work, projects, contact. The first version was a dark minimal design with all sections stubbed out.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
           <strong>Applied my design system skill to style it</strong>
-          <p>Typed <code>/noom-design</code> at the start of the next session and asked Claude to restyle the whole page. The skill loaded the full color palette, typography specs, and layout rules — and applied them in one pass.</p>
+          <p>Typed <code>/noom-design</code> at the start of the next session and asked Claude to restyle the whole page. The skill loaded the full color palette, typography specs, and layout rules and applied them in one pass.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-body">
           <strong>Claude interviewed me to fill in real content</strong>
-          <p>Instead of writing everything myself, Claude asked about my title, work focus areas, About section tone, and contact info. The answers became the actual copy — no blank-page staring.</p>
+          <p>Instead of writing everything from scratch, Claude asked about my title, work focus areas, About section tone, and contact info. The answers became the actual copy.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
         <div class="step-body">
           <strong>Built out project cards as I completed each session</strong>
-          <p>Each AI Builder session produced a new project. As I finished them, I came back and asked Claude to fill in the card — description, popup content, and badge — turning "Coming Soon" into "Live" one at a time.</p>
+          <p>Each AI Builder session produced a new project. As I finished them, I came back and asked Claude to fill in the card: description, popup content, and badge, turning "Coming Soon" into "Live" one at a time.</p>
         </div>
       </div>
     </div>
   </div>
-
+ 
   <!-- Portfolio: Documentation -->
   <div class="modal" id="modal-pf-docs" style="display:none">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-eyebrow">Portfolio Website · Documentation</div>
-    <h2>Build your own<br />portfolio with AI</h2>
-
+    <h2>Build your own portfolio with AI</h2>
+ 
     <p class="doc-section-title">Techniques used</p>
     <ul class="doc-list">
       <li><strong>Single-file HTML</strong> — everything in one <code>.html</code> file: styles, scripts, markup, modal content. No build step, no dependencies beyond Google Fonts.</li>
       <li><strong>Design skill injection</strong> — invoke <code>/noom-design</code> (or your own skill) at session start so Claude applies your brand system without any re-explanation.</li>
       <li><strong>CSS custom properties</strong> — all design tokens stored as <code>:root</code> variables so the entire palette and typography can be swapped in one block.</li>
-      <li><strong>Inline modal system</strong> — popups are hidden <code>div</code>s toggled by JavaScript. No libraries needed — keeps the file truly self-contained.</li>
+      <li><strong>Inline modal system</strong> — popups are hidden <code>div</code>s toggled by JavaScript. No libraries needed, keeping the file truly self-contained.</li>
       <li><strong>Iterative card filling</strong> — project cards start as "Coming Soon" stubs. Each new project session adds real content to one card, keeping momentum without needing the full site done upfront.</li>
       <li><strong>Claude as interviewer</strong> — rather than writing copy from scratch, let Claude ask questions and turn your answers into finished prose.</li>
     </ul>
-
+ 
     <p class="doc-section-title" style="margin-top:32px">Key prompts for your own build</p>
     <ul class="doc-list">
       <li><strong>Scaffold:</strong> "Build me a simple portfolio website as a single HTML page. Interview me about any info you don't have. Google Fonts are the only allowed external resource."</li>
@@ -1268,44 +1147,32 @@
       <li><strong>Update a badge:</strong> "Change the [Project Name] card badge from 'Coming Soon' to 'Live'."</li>
     </ul>
   </div>
-
-  <!-- Empty modal for Coming Soon cards -->
+ 
+  <!-- Empty -->
   <div class="modal" id="modal-empty" style="display:none">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-eyebrow">Coming Soon</div>
     <h2>In progress</h2>
-    <p style="color:var(--gray);font-size:15px;line-height:1.7">This project is still being built. Check back soon — content will appear here once the session is complete.</p>
+    <p style="color:var(--gray);font-size:15px;line-height:1.7">This project is still being built. Content will appear here once the session is complete.</p>
   </div>
-
-</div><!-- end modal-overlay -->
-
+ 
+</div>
+ 
 <script>
   const overlay = document.getElementById('modal-overlay');
-
   function openModal(id) {
-    // Hide all modals
     overlay.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
-    // Show target
     const target = document.getElementById('modal-' + id);
-    if (target) {
-      target.style.display = 'block';
-      overlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
+    if (target) { target.style.display = 'block'; overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
   }
-
   function closeModal() {
     overlay.classList.remove('open');
     document.body.style.overflow = '';
     overlay.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
   }
-
-  function closeModalOnBg(e) {
-    if (e.target === overlay) closeModal();
-  }
-
+  function closeModalOnBg(e) { if (e.target === overlay) closeModal(); }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
-
+ 
 </body>
 </html>
